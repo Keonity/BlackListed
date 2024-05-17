@@ -17,8 +17,10 @@ body {
 }
 
 .headerBottom {
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     display: flex;
+    flex-direction: column;
     flex: 7;
     background-color: black;
     color: white;
@@ -30,7 +32,11 @@ body {
 }
 
 .headerBottom h1 {
-    align-self: flex-start;
+    align-self: center;
     font-weight: bolder;
     font-size: 48px;
+}
+
+.headerBottom input {
+    min-width: 512px;
 }
