@@ -13,11 +13,30 @@
                 <h1>Blacklisted</h1>
                 <input type="text" placeholder="Please enter your e-mail to signup for our newsletter." name="email" id="email" onchange="updateEmail()">
             </div>
+            <script type="module">
+                import pg from './node_modules/pg';
+
+                const { Client } = pg;
+                const client = new Client({
+                    user: "postgres",
+                    password: "Mdjjc59KB79p9q6zPBv4",
+                    host: "database-1.cp4ycg8q4rm4.us-east-1.rds.amazonaws.com",
+                    port: "5432",
+                    database: "database-1"
+                });
+
+                await client.connect(); 
+
+                const result = await client.query('SELECT NOW()');
+                console.log(result);
+            </script>
             <script>
+
                 function updateEmail() {
                     let userEmail = document.getElementById('email').value;
                     let welcomeMsg = document.getElementById('welcomeOne');
                     welcomeMsg.textContent = `Welcome ${userEmail} to`;
+                    client.end()
                 }
             </script>
         </body>
