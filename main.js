@@ -11,8 +11,17 @@ const client = new Client({
 });
 
 await client.connect();
-
 // let emailField = document.querySelector("#email");
+// await client.query('CREATE TABLE testTable (num integer, name text);');
+
+const text = 'INSERT INTO testTable(num, name) VALUES($1, $2) RETURNING *'
+const values = [2, 'brian.m.carlson@gmail.com']
+ 
+const res = await client.query(text, values)
+console.log(res.rows[0])
+
+await client.query('SELECT name from testTable');
+
 await client.end();
 
 /* emailField.addEventListener("change", (event) => {
