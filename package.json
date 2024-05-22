@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "browserify": "^17.0.0",
-    "pg": "^8.11.5"
-  },
-  "type": "module"
-}

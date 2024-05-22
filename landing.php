@@ -18,49 +18,30 @@
                 exit;
                 }
 
-                /* Ensure that the EMPLOYEES table exists. */
+                /* Ensure that the Customers table exists. */
                 VerifyCustomersTable($connection, DB_DATABASE);
 
-                /* If input fields are populated, add a row to the EMPLOYEES table. */
+                /* If input fields are populated, add a row to the CUSTOMERS table. */
                 $customer_name = htmlentities($_POST['NAME']);
                 $customer_email = htmlentities($_POST['EMAIL']);
 
                 if (strlen($customer_name) || strlen($customer_email)) {
                 AddCustomer($connection, $customer_name, $customer_email);
+                header('Location: http://ec2-18-212-92-145.compute-1.amazonaws.com/thankyou.html');
                 }
             ?>
 
-            <!-- Input form -->
-            <form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
-                <table border="0">
-                    <tr>
-                    <td>NAME</td>
-                    <td>EMAIL</td>
-                    </tr>
-                    <tr>
-                    <td>
-                    <input type="text" name="NAME" maxlength="45" size="30" />
-                    </td>
-                    <td>
-                    <input type="text" name="EMAIL" maxlength="90" size="60" />
-                    </td>
-                    <td>
-                    <input type="submit" value="Add Data" />
-                    </td>
-                    </tr>
-                </table>
-            </form>
-            <!-- Display table data. -->
+            <!-- Display table data. 
             <table border="1" cellpadding="2" cellspacing="2">
             <tr>
                 <td>ID</td>
                 <td>NAME</td>
                 <td>EMAIL</td>
-            </tr>
-
+            </tr> -->
+            
             <?php
-
-            $result = pg_query($connection, "SELECT * FROM EMPLOYEES");
+            /*
+            $result = pg_query($connection, "SELECT * FROM CUSTOMERS");
 
             while($query_data = pg_fetch_row($result)) {
             echo "<tr>";
@@ -68,15 +49,36 @@
                 "<td>",$query_data[1], "</td>",
                 "<td>",$query_data[2], "</td>";
             echo "</tr>";
-            }
-            ?>
+            } */
+            ?> 
             </table>
             <div class="headerTop">
                 <h1 id="welcomeOne">Welcome to</h1>
             </div>
             <div class="headerBottom">
                 <h1>Blacklisted</h1>
-                <input type="text" placeholder="Please enter your e-mail to signup for our newsletter." name="email" id="email">
+		<div class="directory">
+			<a>About</a>
+			<a>Models</a>
+			<a>Connect With Us</a>
+			<a>Create With Us</a>
+		</div>
+                            <!-- Input form -->
+                <form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
+                <table style="border:0">
+                    <tr>
+                    <td>
+                    <input type="text" placeholder="Please enter your name to signup for our newsletter." name="NAME" maxlength="45" size="30" />
+                    </td>
+                    <td>
+                    <input type="text" placeholder="Please enter your e-mail to signup for our newsletter." name="EMAIL" maxlength="90" size="60" />
+                    </td>
+                    <td>
+                    <input id="formButton" type="submit" value="Submit" />
+                    </td>
+                    </tr>
+                </table>
+                </form>
             </div>
             <!-- Clean up. -->
             <?php
@@ -88,12 +90,11 @@
 
     <?php
 
-/* Add an employee to the table. */
+/* Add a customer to the table. */
 function AddCustomer($connection, $name, $email) {
    $n = pg_escape_string($name);
    $a = pg_escape_string($email);
-   echo "Forming Query";
-   $query = "INSERT INTO EMPLOYEES (NAME, EMAIL) VALUES ('$n', '$a');";
+   $query = "INSERT INTO CUSTOMERS (NAME, EMAIL) VALUES ('$n', '$a');";
 
    if(!pg_query($connection, $query)) echo("<p>Error adding customer data.</p>"); 
 }

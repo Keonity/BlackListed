@@ -1,0 +1,24 @@
+body {
+   display: flex;
+   flex: 1 1 auto;
+   margin: 0px;
+   min-height: 100vh;
+   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background-color: black;
+   color: white;
+}
+
+.msgContainer {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   align-self: center;
+}
+
+a, u {
+   text-decoration: none;
+}
